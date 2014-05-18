@@ -1,3 +1,5 @@
+console.log("Use `ws.send('#HEX')` to set the background color.");
+
 (function connect() {
 	var ws = window.ws = new WebSocket('ws://' + location.host);
 
