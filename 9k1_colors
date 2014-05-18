@@ -15,10 +15,16 @@ twit.stream('user').on('tweet', function(data) {
 (function connect() {
 	ws = new WebSocket(config.server);
 
+	console.log('WS: connecting');
+
+	ws.on('open',function open() {
+		console.log('WS: connected');
+	});
+
 	ws.on('close', function owwy() {
-		console.log('disconnected');
-		console.log('reconnecting in 20 seconds');
-		setTimeout(connect, 20 * 1000);
+		console.log('WS: disconnected');
+		console.log('WS: reconnecting in 1 second');
+		setTimeout(connect, 1000);
 	});
 })();
 
