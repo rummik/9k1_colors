@@ -16,7 +16,7 @@ ws.on('connection', function(wc) {
 
 app.get('/', function(req, res) {
 	if (process.env.NODE_ENV == 'development')
-		js = fs.readFileSync('sync.js');
+		js = fs.readFileSync('client.js');
 
 	res.set('Content-Type', 'text/html');
 	res.send('<!doctype html><style>html{background:' + background + '}</style><script>' + js + '</script>');
