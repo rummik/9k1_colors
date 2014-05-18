@@ -9,9 +9,21 @@ var ws = new WS({ server: server });
 
 var js = fs.readFileSync('client.js');
 var background = '#22112a';
+var sanity = /^#?([0-9a-f]{6}|[0-9a-f]{3})$/i;
 
 ws.on('connection', function(wc) {
 	wc.send(background);
+
+	wc.on('message', function(bg) {
+		if (!sanity.test(bg))
+			return;
+
+		background = bg;
+
+		ws.clients.forEach(function(client) {
+			client.send(background);
+		});
+	});
 });
 
 app.get('/', function(req, res) {
@@ -29,7 +41,7 @@ app.get('/get', function(req, res) {
 app.all('/set', function(req, res) {
 	var bg = req.param('bg');
 
-	if (!/^#?([0-9a-f]{6}|[0-9a-f]{3})$/i.test(bg))
+	if (!sanity.test(bg))
 		return res.json(400, { error: 'bad background' });
 
 	if (bg[0] != '#')
