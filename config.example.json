@@ -1,0 +1,15 @@
+{
+	"//": "URL to post colors to",
+	"post": "http://colors.9k1.us/set",
+
+	"//": "Verification code",
+	"code": "",
+
+	"//": "Twitter connection settings",
+	"twitter": {
+		"consumer_key": "",
+		"consumer_secret": "",
+		"access_token": "",
+		"access_token_secret": ""
+	}
+}

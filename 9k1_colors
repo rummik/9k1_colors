@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+var config = require(__dirname + '/config.json');
+var Twit = require('twit');
+
+var twit = new Twit(config.twitter);
+
+// vim: set ft=javascript :
