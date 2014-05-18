@@ -1,7 +1,25 @@
 #!/usr/bin/env node
 var config = require(__dirname + '/config.json');
 var Twit = require('twit');
+var WebSocket = require('ws');
+var ws;
 
 var twit = new Twit(config.twitter);
+
+twit.stream('user').on('tweet', function(data) {
+	var color = (data.text.match(/#(?:[0-9a-f]{6}|[0-9a-f]{3})/i) || ['']).shift();
+
+	ws.send(color);
+});
+
+(function connect() {
+	ws = new WebSocket(config.server);
+
+	ws.on('close', function owwy() {
+		console.log('disconnected');
+		console.log('reconnecting in 20 seconds');
+		setTimeout(connect, 20 * 1000);
+	});
+})();
 
 // vim: set ft=javascript :

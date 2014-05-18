@@ -4,8 +4,8 @@
 	 "*": "It isn't used by the HTTP/WebSocket server.",
 	 "*/": "",
 
-	"//": "URL to post colors to",
-	"post": "http://colors.9k1.us/set",
+	"//": "WebSocket server",
+	"server": "ws://colors.9k1.us",
 
 	"//": "Twitter connection settings",
 	"twitter": {
