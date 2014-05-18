@@ -2,9 +2,6 @@
 	"//": "URL to post colors to",
 	"post": "http://colors.9k1.us/set",
 
-	"//": "Verification code",
-	"code": "",
-
 	"//": "Twitter connection settings",
 	"twitter": {
 		"consumer_key": "",
