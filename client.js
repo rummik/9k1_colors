@@ -1,5 +1,5 @@
 (function connect() {
-	var ws = new WebSocket('ws://' + location.host);
+	var ws = window.ws = new WebSocket('ws://' + location.host);
 
 	console.log('connecting');
 
