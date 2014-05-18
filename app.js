@@ -26,6 +26,11 @@ function setBackground(color) {
 	return true;
 }
 
+(function keepalive() {
+	setBackground(background);
+	setTimeout(keepalive, 15 * 1000);
+})();
+
 ws.on('connection', function(wc) {
 	wc.send(background);
 
