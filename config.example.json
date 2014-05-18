@@ -1,4 +1,9 @@
 {
+	"/**": "",
+	 "*": "This is the twitter bot config file.",
+	 "*": "It isn't used by the HTTP/WebSocket server.",
+	 "*/": "",
+
 	"//": "URL to post colors to",
 	"post": "http://colors.9k1.us/set",
 
