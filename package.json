@@ -5,7 +5,6 @@
   "dependencies": {
     "twit": "~1.1.12",
     "express": "~4.2.0",
-    "request": "~2.35.0",
     "ws": "~0.4.31"
   }
 }
