@@ -9,20 +9,28 @@ var ws = new WS({ server: server });
 
 var js = fs.readFileSync('client.js');
 var background = '#22112a';
-var sanity = /^#?([0-9a-f]{6}|[0-9a-f]{3})$/i;
+
+function setBackground(color) {
+	if (!/^#?([0-9a-f]{6}|[0-9a-f]{3})$/i.test(color))
+		return false;
+
+	if (color[0] != '#')
+		color = '#' + color;
+
+	background = color;
+
+	ws.clients.forEach(function(client) {
+		client.send(background);
+	});
+
+	return true;
+}
 
 ws.on('connection', function(wc) {
 	wc.send(background);
 
 	wc.on('message', function(bg) {
-		if (!sanity.test(bg))
-			return;
-
-		background = bg;
-
-		ws.clients.forEach(function(client) {
-			client.send(background);
-		});
+		setBackground(bg);
 	});
 });
 
@@ -41,18 +49,10 @@ app.get('/get', function(req, res) {
 app.all('/set', function(req, res) {
 	var bg = req.param('bg');
 
-	if (!sanity.test(bg))
+	if (!setBackground(bg))
 		return res.json(400, { error: 'bad background' });
 
-	if (bg[0] != '#')
-		bg = '#' + bg;
-
-	background = bg;
 	res.json({ message: 'background changed' });
-
-	ws.clients.forEach(function(client) {
-		client.send(background);
-	});
 });
 
 server.listen(process.env.PORT || 9001);
